@@ -122,30 +122,30 @@
 
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">🚀 ¡Genial! Tu llamada ha sido confirmada</h2>
               
-              <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-6 mb-6">
-                <div className="flex items-start gap-3 mb-4">
-                  <Mail className="w-6 h-6 text-blue-900 flex-shrink-0 mt-1" />
-                  <p className="text-left text-gray-800 font-medium">
+              <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-5 mb-5">
+                <div className="flex items-start gap-3 mb-3">
+                  <Mail className="w-5 h-5 text-blue-900 flex-shrink-0 mt-1" />
+                  <p className="text-left text-sm text-gray-800 font-medium">
                     <span className="font-bold text-blue-900">En los próximos 30 minutos</span>, revisa tu correo electrónico. Recibirás mi análisis personalizado de tu caso con el paso a paso de cómo podríamos ayudarte a escalar tu negocio.
                   </p>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <MessageCircle className="w-6 h-6 text-blue-900 flex-shrink-0 mt-1" />
-                  <p className="text-left text-gray-800 font-medium">
+                  <MessageCircle className="w-5 h-5 text-blue-900 flex-shrink-0 mt-1" />
+                  <p className="text-left text-sm text-gray-800 font-medium">
                     A partir de ahora, <span className="font-bold text-blue-900">toda la comunicación será por WhatsApp</span>. Estate atento a los mensajes para coordinar los detalles de tu sesión.
                   </p>
                 </div>
               </div>
 
-              <div className="bg-gray-50 border-2 border-gray-200 rounded-xl p-5 mb-8">
-                <p className="text-sm text-gray-700 leading-relaxed">
+              <div className="bg-gray-50 border-2 border-gray-200 rounded-xl p-4 mb-6">
+                <p className="text-xs text-gray-700 leading-relaxed">
                   📌 <strong>Tip:</strong> Revisa tu carpeta de spam o promociones si no ves el correo en tu bandeja principal. Guarda mi número de WhatsApp para no perderte ninguna actualización.
                 </p>
               </div>
 
-              <div className="pt-4">
-                <p className="text-lg text-gray-600">
+              <div className="pt-3">
+                <p className="text-base text-gray-600">
                   ¡Nos vemos pronto! 👋
                 </p>
               </div>
@@ -155,54 +155,54 @@
       }
 
       return (
-        <div className="min-h-screen bg-white py-12 px-4">
-          <div className="max-w-3xl mx-auto">
-            <div className="bg-white rounded-2xl shadow-2xl border-2 border-gray-200 p-8 md:p-12">
-              <div className="space-y-8">
+        <div className="min-h-screen bg-white py-10 px-4">
+          <div className="max-w-2xl mx-auto">
+            <div className="bg-white rounded-2xl shadow-2xl border-2 border-gray-200 p-6 md:p-10">
+              <div className="space-y-6">
                 {/* Mensaje introductorio */}
-                <div className="bg-blue-50 border-l-4 border-blue-900 p-5 rounded-lg">
-                  <p className="text-gray-800 font-medium leading-relaxed">
+                <div className="bg-blue-50 border-l-4 border-blue-900 p-4 rounded-lg">
+                  <p className="text-sm text-gray-800 font-medium leading-relaxed">
                     Por favor, responde estas preguntas. <span className="font-bold text-blue-900">Tomará menos de un minuto</span> y son <span className="font-bold text-blue-900">indispensables para confirmar tu llamada</span>; si no las completas, tendremos que cancelar tu sesión.
                   </p>
                 </div>
 
                 {/* Información personal */}
-                <div className="space-y-6 pb-8 border-b-2 border-gray-200">
+                <div className="space-y-5 pb-6 border-b-2 border-gray-200">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">Nombre completo *</label>
+                    <label className="block text-xs font-semibold text-gray-700 mb-2">Nombre completo *</label>
                     <input
                       type="text"
                       value={formData.fullName}
                       onChange={(e) => handleInputChange('fullName', e.target.value)}
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-blue-900 outline-none transition"
+                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-900 focus:border-blue-900 outline-none transition"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
+                    <label className="block text-xs font-semibold text-gray-700 mb-2">Email *</label>
                     <input
                       type="email"
                       value={formData.email}
                       onChange={(e) => handleInputChange('email', e.target.value)}
                       placeholder="Ingresa tu correo electrónico (usa el mismo con el que agendaste tu primera llamada)"
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-blue-900 outline-none transition"
+                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-900 focus:border-blue-900 outline-none transition"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">Teléfono *</label>
+                    <label className="block text-xs font-semibold text-gray-700 mb-2">Teléfono *</label>
                     <input
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => handleInputChange('phone', e.target.value)}
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-blue-900 outline-none transition"
+                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-900 focus:border-blue-900 outline-none transition"
                     />
                   </div>
                 </div>
 
-                <div className="space-y-4 pb-8 border-b-2 border-gray-200">
-                  <h2 className="text-xl font-bold text-gray-900">1️⃣ En promedio, ¿cuántas personas están comprando tus servicios o programas cada semana? *</h2>
-                  <div className="space-y-3">
+                <div className="space-y-3 pb-6 border-b-2 border-gray-200">
+                  <h2 className="text-base font-bold text-gray-900">En promedio, ¿cuántas personas están comprando tus servicios o programas cada semana? *</h2>
+                  <div className="space-y-2">
                     {[
                       { value: 'Ninguna por ahora', label: 'Ninguna por ahora.' },
                       { value: 'Entre 1 y 10 personas', label: 'Entre 1 y 10 personas por semana.' },
@@ -211,7 +211,7 @@
                     ].map((option) => (
                       <label
                         key={option.value}
-                        className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                        className={`flex items-center p-3 border rounded-lg cursor-pointer transition-all ${
                           formData.weeklyClients === option.value ? 'border-blue-900 bg-blue-50' : 'border-gray-300 hover:border-blue-900'
                         }`}
                       >
@@ -221,17 +221,17 @@
                           value={option.value}
                           checked={formData.weeklyClients === option.value}
                           onChange={(e) => handleInputChange('weeklyClients', e.target.value)}
-                          className="w-5 h-5 text-blue-900"
+                          className="w-4 h-4 text-blue-900"
                         />
-                        <span className="ml-3 text-gray-900 font-medium">{option.label}</span>
+                        <span className="ml-2 text-gray-900 font-medium text-sm">{option.label}</span>
                       </label>
                     ))}
                   </div>
                 </div>
 
-                <div className="space-y-4 pb-8 border-b-2 border-gray-200">
-                  <h2 className="text-xl font-bold text-gray-900">2️⃣ En promedio, ¿cuántas llamadas de venta calificadas estás teniendo al día? *</h2>
-                  <div className="space-y-3">
+                <div className="space-y-3 pb-6 border-b-2 border-gray-200">
+                  <h2 className="text-base font-bold text-gray-900">En promedio, ¿cuántas llamadas de venta calificadas estás teniendo al día? *</h2>
+                  <div className="space-y-2">
                     {[
                       { value: 'Ninguna todavía', label: 'Ninguna todavía.' },
                       { value: '1 a 2 por día', label: '1 a 2 por día.' },
@@ -240,7 +240,7 @@
                     ].map((option) => (
                       <label
                         key={option.value}
-                        className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                        className={`flex items-center p-3 border rounded-lg cursor-pointer transition-all ${
                           formData.dailyCalls === option.value ? 'border-blue-900 bg-blue-50' : 'border-gray-300 hover:border-blue-900'
                         }`}
                       >
@@ -250,17 +250,17 @@
                           value={option.value}
                           checked={formData.dailyCalls === option.value}
                           onChange={(e) => handleInputChange('dailyCalls', e.target.value)}
-                          className="w-5 h-5 text-blue-900"
+                          className="w-4 h-4 text-blue-900"
                         />
-                        <span className="ml-3 text-gray-900 font-medium">{option.label}</span>
+                        <span className="ml-2 text-gray-900 font-medium text-sm">{option.label}</span>
                       </label>
                     ))}
                   </div>
                 </div>
 
-                <div className="space-y-4 pb-8 border-b-2 border-gray-200">
-                  <h2 className="text-xl font-bold text-gray-900">3️⃣ ¿Cuál es tu estrategia actual para vender con tu contenido? *</h2>
-                  <div className="space-y-3">
+                <div className="space-y-3 pb-6 border-b-2 border-gray-200">
+                  <h2 className="text-base font-bold text-gray-900">¿Cuál es tu estrategia actual para vender con tu contenido? *</h2>
+                  <div className="space-y-2">
                     {[
                       { value: 'Estrategia clara y funciona', label: 'Tengo una estrategia clara y me está funcionando.' },
                       { value: 'Tengo estrategia sin resultados', label: 'Tengo una estrategia, pero no está generando los resultados que quiero.' },
@@ -268,7 +268,7 @@
                     ].map((option) => (
                       <label
                         key={option.value}
-                        className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                        className={`flex items-center p-3 border rounded-lg cursor-pointer transition-all ${
                           formData.contentStrategy === option.value ? 'border-blue-900 bg-blue-50' : 'border-gray-300 hover:border-blue-900'
                         }`}
                       >
@@ -278,17 +278,17 @@
                           value={option.value}
                           checked={formData.contentStrategy === option.value}
                           onChange={(e) => handleInputChange('contentStrategy', e.target.value)}
-                          className="w-5 h-5 text-blue-900"
+                          className="w-4 h-4 text-blue-900"
                         />
-                        <span className="ml-3 text-gray-900 font-medium">{option.label}</span>
+                        <span className="ml-2 text-gray-900 font-medium text-sm">{option.label}</span>
                       </label>
                     ))}
                   </div>
                 </div>
 
-                <div className="space-y-4 pb-8 border-b-2 border-gray-200">
-                  <h2 className="text-xl font-bold text-gray-900">4️⃣ ¿Qué tipo de sistema de ventas estás utilizando hoy? *</h2>
-                  <div className="space-y-3">
+                <div className="space-y-3 pb-6 border-b-2 border-gray-200">
+                  <h2 className="text-base font-bold text-gray-900">¿Qué tipo de sistema de ventas estás utilizando hoy? *</h2>
+                  <div className="space-y-2">
                     {[
                       { value: 'Ventas por mensajes/DM', label: 'Cierro ventas por mensajes o DM.' },
                       { value: 'Ventas por llamadas', label: 'Cierro ventas por llamadas (orgánico o setters).' },
@@ -297,7 +297,7 @@
                     ].map((option) => (
                       <label
                         key={option.value}
-                        className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                        className={`flex items-center p-3 border rounded-lg cursor-pointer transition-all ${
                           formData.salesSystem === option.value ? 'border-blue-900 bg-blue-50' : 'border-gray-300 hover:border-blue-900'
                         }`}
                       >
@@ -307,17 +307,17 @@
                           value={option.value}
                           checked={formData.salesSystem === option.value}
                           onChange={(e) => handleInputChange('salesSystem', e.target.value)}
-                          className="w-5 h-5 text-blue-900"
+                          className="w-4 h-4 text-blue-900"
                         />
-                        <span className="ml-3 text-gray-900 font-medium">{option.label}</span>
+                        <span className="ml-2 text-gray-900 font-medium text-sm">{option.label}</span>
                       </label>
                     ))}
                   </div>
                 </div>
 
-                <div className="space-y-4 pb-8">
-                  <h2 className="text-xl font-bold text-gray-900">5️⃣ En promedio, ¿cuánto estás facturando actualmente al mes con tu negocio? *</h2>
-                  <div className="space-y-3">
+                <div className="space-y-3 pb-6">
+                  <h2 className="text-base font-bold text-gray-900">En promedio, ¿cuánto estás facturando actualmente al mes con tu negocio? *</h2>
+                  <div className="space-y-2">
                     {[
                       { value: 'Menos de $1.000 USD', label: 'Menos de $1.000 USD.' },
                       { value: 'Entre $1.000 y $3.000 USD', label: 'Entre $1.000 y $3.000 USD.' },
@@ -326,7 +326,7 @@
                     ].map((option) => (
                       <label
                         key={option.value}
-                        className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                        className={`flex items-center p-3 border rounded-lg cursor-pointer transition-all ${
                           formData.monthlyRevenue === option.value ? 'border-blue-900 bg-blue-50' : 'border-gray-300 hover:border-blue-900'
                         }`}
                       >
@@ -336,26 +336,26 @@
                           value={option.value}
                           checked={formData.monthlyRevenue === option.value}
                           onChange={(e) => handleInputChange('monthlyRevenue', e.target.value)}
-                          className="w-5 h-5 text-blue-900"
+                          className="w-4 h-4 text-blue-900"
                         />
-                        <span className="ml-3 text-gray-900 font-medium">{option.label}</span>
+                        <span className="ml-2 text-gray-900 font-medium text-sm">{option.label}</span>
                       </label>
                     ))}
                   </div>
                 </div>
 
-                <div className="pt-6 flex justify-center">
+                <div className="pt-5 flex justify-center">
                   <button
                     onClick={handleSubmit}
                     disabled={!isFormValid() || isSubmitting}
-                    className={`px-12 py-3 rounded-full font-bold text-base flex items-center justify-center gap-2 transition-all ${
+                    className={`px-10 py-2.5 rounded-full font-bold text-sm flex items-center justify-center gap-2 transition-all ${
                       isFormValid() && !isSubmitting
                         ? 'bg-blue-900 text-white hover:bg-blue-800 shadow-lg hover:scale-105'
                         : 'bg-gray-300 text-white cursor-not-allowed'
                     }`}
                   >
-                    {isSubmitting ? 'Enviando...' : 'Confirmar mi llamada 🚀'}
-                    <ArrowRight className="w-5 h-5" />
+                    {isSubmitting ? 'Enviando...' : 'Confirmar mi llamada'}
+                    <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
               </div>
