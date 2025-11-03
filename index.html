@@ -75,8 +75,8 @@
             fechaEnvio: new Date().toISOString()
           };
 
-          // Enviar a Make - REEMPLAZA ESTA URL CON TU WEBHOOK DE MAKE
-          const response = await fetch('TU_WEBHOOK_DE_MAKE_AQUI', {
+          // Enviar a Make
+          const response = await fetch('https://hook.us2.make.com/etytpj8kh2h68l50k3vp9c2t3555pwt4', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
