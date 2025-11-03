@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Content Flow / Form</title>
+
+  <!-- Estilos -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- React 18 + Babel (para JSX en el navegador) -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-white">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    // --------- Iconos SVG (React Components) ----------
+    const ArrowRight = (props) => (
+      <svg viewBox="0 0 24 24" width="1em" height="1em" {...props} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path>
+      </svg>
+    );
+    const CheckCircle2 = (props) => (
+      <svg viewBox="0 0 24 24" width="1em" height="1em" {...props} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path d="M22 4 12 14.01l-3-3"></path>
+      </svg>
+    );
+    const Mail = (props) => (
+      <svg viewBox="0 0 24 24" width="1em" height="1em" {...props} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M22 7l-10 6L2 7"></path>
+      </svg>
+    );
+    const MessageCircle = (props) => (
+      <svg viewBox="0 0 24 24" width="1em" height="1em" {...props} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+      </svg>
+    );
+    // ---------------------------------------------------
+
+    function LeadQualificationForm() {
+      const [formData, setFormData] = React.useState({
+        fullName: '',
+        phone: '',
+        email: '',
+        weeklyClients: '',
+        dailyCalls: '',
+        contentStrategy: '',
+        salesSystem: '',
+        monthlyRevenue: ''
+      });
+      const [result, setResult] = React.useState(null);
+      const [isSubmitting, setIsSubmitting] = React.useState(false);
+
+      const handleInputChange = (field, value) => {
+        setFormData(prev => ({ ...prev, [field]: value }));
+      };
+
+      const handleSubmit = async () => {
+        setIsSubmitting(true);
+        
+        try {
+          // Preparar los datos para enviar a Make
+          const dataToSend = {
+            nombreCompleto: formData.fullName,
+            telefono: formData.phone,
+            email: formData.email,
+            clientesPorSemana: formData.weeklyClients,
+            llamadasPorDia: formData.dailyCalls,
+            estrategiaContenido: formData.contentStrategy,
+            sistemaVentas: formData.salesSystem,
+            facturacionMensual: formData.monthlyRevenue,
+            fechaEnvio: new Date().toISOString()
+          };
+
+          // Enviar a Make - REEMPLAZA ESTA URL CON TU WEBHOOK DE MAKE
+          const response = await fetch('TU_WEBHOOK_DE_MAKE_AQUI', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(dataToSend)
+          });
+
+          if (response.ok) {
+            // Mostrar resultado
+            setResult(true);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else {
+            alert('Hubo un error al enviar el formulario. Por favor intenta de nuevo.');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('Error de conexión. Por favor verifica tu internet e intenta de nuevo.');
+        } finally {
+          setIsSubmitting(false);
+        }
+      };
+
+      const isFormValid = () => {
+        return (
+          formData.fullName &&
+          formData.phone &&
+          formData.email &&
+          formData.weeklyClients &&
+          formData.dailyCalls &&
+          formData.contentStrategy &&
+          formData.salesSystem &&
+          formData.monthlyRevenue
+        );
+      };
+
+      if (result) {
+        return (
+          <div className="min-h-screen bg-white flex items-center justify-center p-4">
+            <div className="max-w-2xl w-full bg-white rounded-2xl shadow-2xl border-2 border-gray-200 p-8 md:p-12 text-center animate-fadeIn">
+              <div className="w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center bg-blue-900">
+                <CheckCircle2 className="w-12 h-12 text-white" />
+              </div>
+
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">🚀 ¡Genial! Tu llamada ha sido confirmada</h2>
+              
+              <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-6 mb-6">
+                <div className="flex items-start gap-3 mb-4">
+                  <Mail className="w-6 h-6 text-blue-900 flex-shrink-0 mt-1" />
+                  <p className="text-left text-gray-800 font-medium">
+                    <span className="font-bold text-blue-900">En los próximos 30 minutos</span>, revisa tu correo electrónico. Recibirás mi análisis personalizado de tu caso con el paso a paso de cómo podríamos ayudarte a escalar tu negocio.
+                  </p>
+                </div>
+                
+                <div className="flex items-start gap-3">
+                  <MessageCircle className="w-6 h-6 text-blue-900 flex-shrink-0 mt-1" />
+                  <p className="text-left text-gray-800 font-medium">
+                    A partir de ahora, <span className="font-bold text-blue-900">toda la comunicación será por WhatsApp</span>. Estate atento a los mensajes para coordinar los detalles de tu sesión.
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-gray-50 border-2 border-gray-200 rounded-xl p-5 mb-8">
+                <p className="text-sm text-gray-700 leading-relaxed">
+                  📌 <strong>Tip:</strong> Revisa tu carpeta de spam o promociones si no ves el correo en tu bandeja principal. Guarda mi número de WhatsApp para no perderte ninguna actualización.
+                </p>
+              </div>
+
+              <div className="pt-4">
+                <p className="text-lg text-gray-600">
+                  ¡Nos vemos pronto! 👋
+                </p>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      return (
+        <div className="min-h-screen bg-white py-12 px-4">
+          <div className="max-w-3xl mx-auto">
+            <div className="bg-white rounded-2xl shadow-2xl border-2 border-gray-200 p-8 md:p-12">
+              <div className="space-y-8">
+                {/* Mensaje introductorio */}
+                <div className="bg-blue-50 border-l-4 border-blue-900 p-5 rounded-lg">
+                  <p className="text-gray-800 font-medium leading-relaxed">
+                    Por favor, responde estas preguntas. <span className="font-bold text-blue-900">Tomará menos de un minuto</span> y son <span className="font-bold text-blue-900">indispensables para confirmar tu llamada</span>; si no las completas, tendremos que cancelar tu sesión.
+                  </p>
+                </div>
+
+                {/* Información personal */}
+                <div className="space-y-6 pb-8 border-b-2 border-gray-200">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">Nombre completo *</label>
+                    <input
+                      type="text"
+                      value={formData.fullName}
+                      onChange={(e) => handleInputChange('fullName', e.target.value)}
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-blue-900 outline-none transition"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
+                    <input
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => handleInputChange('email', e.target.value)}
+                      placeholder="Ingresa tu correo electrónico (usa el mismo con el que agendaste tu primera llamada)"
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-blue-900 outline-none transition"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">Teléfono *</label>
+                    <input
+                      type="tel"
+                      value={formData.phone}
+                      onChange={(e) => handleInputChange('phone', e.target.value)}
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-blue-900 outline-none transition"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-4 pb-8 border-b-2 border-gray-200">
+                  <h2 className="text-xl font-bold text-gray-900">1️⃣ En promedio, ¿cuántas personas están comprando tus servicios o programas cada semana? *</h2>
+                  <div className="space-y-3">
+                    {[
+                      { value: 'Ninguna por ahora', label: 'Ninguna por ahora.' },
+                      { value: 'Entre 1 y 10 personas', label: 'Entre 1 y 10 personas por semana.' },
+                      { value: 'Entre 11 y 25 personas', label: 'Entre 11 y 25 personas por semana.' },
+                      { value: 'Más de 50 personas', label: 'Más de 50 personas por semana.' }
+                    ].map((option) => (
+                      <label
+                        key={option.value}
+                        className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                          formData.weeklyClients === option.value ? 'border-blue-900 bg-blue-50' : 'border-gray-300 hover:border-blue-900'
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="weeklyClients"
+                          value={option.value}
+                          checked={formData.weeklyClients === option.value}
+                          onChange={(e) => handleInputChange('weeklyClients', e.target.value)}
+                          className="w-5 h-5 text-blue-900"
+                        />
+                        <span className="ml-3 text-gray-900 font-medium">{option.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-4 pb-8 border-b-2 border-gray-200">
+                  <h2 className="text-xl font-bold text-gray-900">2️⃣ En promedio, ¿cuántas llamadas de venta calificadas estás teniendo al día? *</h2>
+                  <div className="space-y-3">
+                    {[
+                      { value: 'Ninguna todavía', label: 'Ninguna todavía.' },
+                      { value: '1 a 2 por día', label: '1 a 2 por día.' },
+                      { value: '2 a 5 por día', label: '2 a 5 por día.' },
+                      { value: '5 a 10 por día', label: '5 a 10 por día.' }
+                    ].map((option) => (
+                      <label
+                        key={option.value}
+                        className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                          formData.dailyCalls === option.value ? 'border-blue-900 bg-blue-50' : 'border-gray-300 hover:border-blue-900'
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="dailyCalls"
+                          value={option.value}
+                          checked={formData.dailyCalls === option.value}
+                          onChange={(e) => handleInputChange('dailyCalls', e.target.value)}
+                          className="w-5 h-5 text-blue-900"
+                        />
+                        <span className="ml-3 text-gray-900 font-medium">{option.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-4 pb-8 border-b-2 border-gray-200">
+                  <h2 className="text-xl font-bold text-gray-900">3️⃣ ¿Cuál es tu estrategia actual para vender con tu contenido? *</h2>
+                  <div className="space-y-3">
+                    {[
+                      { value: 'Estrategia clara y funciona', label: 'Tengo una estrategia clara y me está funcionando.' },
+                      { value: 'Tengo estrategia sin resultados', label: 'Tengo una estrategia, pero no está generando los resultados que quiero.' },
+                      { value: 'Sin estrategia definida', label: 'No tengo una estrategia definida.' }
+                    ].map((option) => (
+                      <label
+                        key={option.value}
+                        className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                          formData.contentStrategy === option.value ? 'border-blue-900 bg-blue-50' : 'border-gray-300 hover:border-blue-900'
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="contentStrategy"
+                          value={option.value}
+                          checked={formData.contentStrategy === option.value}
+                          onChange={(e) => handleInputChange('contentStrategy', e.target.value)}
+                          className="w-5 h-5 text-blue-900"
+                        />
+                        <span className="ml-3 text-gray-900 font-medium">{option.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-4 pb-8 border-b-2 border-gray-200">
+                  <h2 className="text-xl font-bold text-gray-900">4️⃣ ¿Qué tipo de sistema de ventas estás utilizando hoy? *</h2>
+                  <div className="space-y-3">
+                    {[
+                      { value: 'Ventas por mensajes/DM', label: 'Cierro ventas por mensajes o DM.' },
+                      { value: 'Ventas por llamadas', label: 'Cierro ventas por llamadas (orgánico o setters).' },
+                      { value: 'Automatizaciones', label: 'Uso automatizaciones (embudos, webinars, etc.).' },
+                      { value: 'Sin sistema definido', label: 'No tengo un sistema de ventas definido.' }
+                    ].map((option) => (
+                      <label
+                        key={option.value}
+                        className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                          formData.salesSystem === option.value ? 'border-blue-900 bg-blue-50' : 'border-gray-300 hover:border-blue-900'
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="salesSystem"
+                          value={option.value}
+                          checked={formData.salesSystem === option.value}
+                          onChange={(e) => handleInputChange('salesSystem', e.target.value)}
+                          className="w-5 h-5 text-blue-900"
+                        />
+                        <span className="ml-3 text-gray-900 font-medium">{option.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-4 pb-8">
+                  <h2 className="text-xl font-bold text-gray-900">5️⃣ En promedio, ¿cuánto estás facturando actualmente al mes con tu negocio? *</h2>
+                  <div className="space-y-3">
+                    {[
+                      { value: 'Menos de $1.000 USD', label: 'Menos de $1.000 USD.' },
+                      { value: 'Entre $1.000 y $3.000 USD', label: 'Entre $1.000 y $3.000 USD.' },
+                      { value: 'Entre $3.000 y $8.000 USD', label: 'Entre $3.000 y $8.000 USD.' },
+                      { value: 'Más de $8.000 USD', label: 'Más de $8.000 USD.' }
+                    ].map((option) => (
+                      <label
+                        key={option.value}
+                        className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                          formData.monthlyRevenue === option.value ? 'border-blue-900 bg-blue-50' : 'border-gray-300 hover:border-blue-900'
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="monthlyRevenue"
+                          value={option.value}
+                          checked={formData.monthlyRevenue === option.value}
+                          onChange={(e) => handleInputChange('monthlyRevenue', e.target.value)}
+                          className="w-5 h-5 text-blue-900"
+                        />
+                        <span className="ml-3 text-gray-900 font-medium">{option.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-6 flex justify-center">
+                  <button
+                    onClick={handleSubmit}
+                    disabled={!isFormValid() || isSubmitting}
+                    className={`px-12 py-3 rounded-full font-bold text-base flex items-center justify-center gap-2 transition-all ${
+                      isFormValid() && !isSubmitting
+                        ? 'bg-blue-900 text-white hover:bg-blue-800 shadow-lg hover:scale-105'
+                        : 'bg-gray-300 text-white cursor-not-allowed'
+                    }`}
+                  >
+                    {isSubmitting ? 'Enviando...' : 'Confirmar mi llamada 🚀'}
+                    <ArrowRight className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <style>{`
+            @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+            .animate-fadeIn { animation: fadeIn 0.5s ease-out; }
+          `}</style>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<LeadQualificationForm />);
+  </script>
+</body>
+</html>
